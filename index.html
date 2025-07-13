@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surpresa para Letícia Beatriz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Gloria+Hallelujah&family=Creepster&display=swap');
+        
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a2e;
+            color: #f8f8f8;
+            font-family: 'Indie Flower', cursive;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(150, 100, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 100, 150, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            font-family: 'Creepster', cursive;
+            color: #e94584;
+            font-size: 3rem;
+            text-shadow: 3px 3px 0 #000;
+            margin-bottom: 0;
+            animation: pulse 2s infinite alternate;
+        }
+        
+        h2 {
+            font-family: 'Gloria Hallelujah', cursive;
+            color: #b399d4;
+            margin-top: 10px;
+        }
+        
+        .birthday-date {
+            font-size: 1.5rem;
+            color: #f8f8f8;
+            background: rgba(233, 69, 132, 0.3);
+            padding: 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        
+        .message {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            margin: 30px 0;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #e94584;
+        }
+        
+        .lavender {
+            color: #b399d4;
+            font-size: 2rem;
+            margin: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .heart {
+            font-size: 1.5rem;
+            animation: beat 1s infinite alternate;
+            display: inline-block;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #e94584, #b399d4);
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Gloria Hallelujah', cursive;
+            margin: 20px 0;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .surprise-container {
+            margin-top: 30px;
+        }
+        
+        .photo-frame {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border: 10px solid #b399d4;
+            border-radius: 50%;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(179, 153, 212, 0.6);
+            position: relative;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+        
+        .heart-particle {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            animation: float-up 4s linear forwards;
+        }
+        
+        .rick-morty {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 100px;
+            opacity: 0.7;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .rick-morty:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        .deadpool {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 100px;
+            opacity: 0.7;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .deadpool:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        @keyframes beat {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.3); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        @keyframes float-up {
+            0% { 
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: #b399d4;
+        }
+        
+        /* Efeito de confete */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #e94584;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="floating-hearts" id="hearts-container"></div>
+        
+        <div id="initial-content">
+            <h1>Feliz Aniversário, Letícia Beatriz!</h1>
+            <h2>14/07 - Um dia mais que especial</h2>
+            
+            <div class="birthday-date">
+                🎉 14 de Julho 🎂
+            </div>
+            
+            <div class="lavender">🌸🌿💜</div>
+            
+            <div class="message">
+                <p>Letícia,</p>
+                <p>Hoje é o dia de celebrar você - essa pessoa incrível, única e maravilhosa que ilumina minha vida todos os dias.</p>
+                <p>Que este novo ano de vida traga ainda mais alegrias, conquistas e momentos especiais. Você merece tudo de melhor que a vida pode oferecer!</p>
+                <p>Obrigado por ser quem você é e por compartilhar sua vida comigo. Cada dia ao seu lado é um presente.</p>
+                <p>Com todo meu carinho, <span class="heart">♡</span></p>
+            </div>
+            
+            <button class="btn" id="surprise-btn">Clique para uma surpresa!</button>
+            
+            <div class="footer">
+                Feito com <span class="heart">♡</span> para Letícia Beatriz
+            </div>
+        </div>
+        
+        <div id="surprise-content" class="hidden">
+            <h1>Uau! Você encontrou a surpresa!</h1>
+            <h2>Para a pessoa mais incrível do universo</h2>
+            
+            <div class="photo-frame">
+                <!-- Espaço para uma foto - você pode adicionar uma imagem real aqui -->
+                <div style="width:100%; height:100%; background: linear-gradient(45deg, #b399d4, #e94584); display: flex; justify-content: center; align-items: center;">
+                    <span style="font-size: 3rem; color: white;">L&B <span class="heart">♡</span></span>
+                </div>
+            </div>
+            
+            <div class="message">
+                <p>Letícia,</p>
+                <p>Você é como as flores de lavanda - bela, única e com um aroma que permanece em tudo que toca.</p>
+                <p>Neste dia especial, quero que saiba o quanto você é importante e amada. Que possamos comemorar muitos outros aniversários juntos!</p>
+                <p>Te amo mais que todas as estrelas do céu e todos os episódios de Rick e Morty combinados!</p>
+                <p>Feliz aniversário, meu amor <span class="heart">♡</span></p>
+            </div>
+            
+            <button class="btn" id="confetti-btn">Liberar confetes!</button>
+            <button class="btn" id="back-btn">Voltar</button>
+        </div>
+    </div>
+    
+    <img src="https://i.imgur.com/VZQDqj1.png" alt="Rick and Morty" class="rick-morty" title="Wubba lubba dub dub!">
+    <img src="https://i.imgur.com/XWg5DoX.png" alt="Deadpool" class="deadpool" title="Chimichangas!">
+    
+    <script>
+        // Criar corações flutuantes
+        function createHearts() {
+            const container = document.getElementById('hearts-container');
+            const heart = document.createElement('div');
+            heart.innerHTML = '♡';
+            heart.classList.add('heart-particle');
+            
+            // Posição aleatória
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 3 + Math.random() * 5 + 's';
+            heart.style.fontSize = 10 + Math.random() * 20 + 'px';
+            heart.style.color = `hsl(${Math.random() * 60 + 270}, 100%, 70%)`;
+            
+            container.appendChild(heart);
+            
+            // Remover após a animação terminar
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        // Criar confetes
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                // Posição aleatória
+                confetti.style.left = Math.random() * 100 + 'vw';
+                
+                // Cor aleatória
+                const colors = ['#e94584', '#b399d4', '#ffcc00', '#00ccff', '#ff6666'];
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
+                // Tamanho aleatório
+                const size = Math.random() * 10 + 5;
+                confetti.style.width = size + 'px';
+                confetti.style.height = size + 'px';
+                
+                // Animação aleatória
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.body.appendChild(confetti);
+                
+                // Remover após a animação terminar
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Botão de surpresa
+        document.getElementById('surprise-btn').addEventListener('click', function() {
+            document.getElementById('initial-content').classList.add('hidden');
+            document.getElementById('surprise-content').classList.remove('hidden');
+            createConfetti();
+        });
+        
+        // Botão de voltar
+        document.getElementById('back-btn').addEventListener('click', function() {
+            document.getElementById('initial-content').classList.remove('hidden');
+            document.getElementById('surprise-content').classList.add('hidden');
+        });
+        
+        // Botão de confetes
+        document.getElementById('confetti-btn').addEventListener('click', function() {
+            createConfetti();
+        });
+        
+        // Criar corações continuamente
+        setInterval(createHearts, 300);
+        
+        // Efeito especial para os personagens
+        document.querySelector('.rick-morty').addEventListener('click', function() {
+            alert("Rick and Morty dizem: Feliz aniversário, Letícia! Wubba lubba dub dub!");
+        });
+        
+        document.querySelector('.deadpool').addEventListener('click', function() {
+            alert("Deadpool diz: Feliz aniversário, Letícia! Espero que seu dia seja tão incrível quanto meus chimichangas!");
+        });
+    </script>
+</body>
+</html>
