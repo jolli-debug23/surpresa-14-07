@@ -3,20 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surpresa para Letícia Beatriz</title>
+    <title>Feliz 17 Anos, Letícia!</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Gloria+Hallelujah&family=Creepster&display=swap');
+        
+        :root {
+            --primary: #e94584;
+            --secondary: #b399d4;
+            --dark: #1a1a2e;
+            --light: #f8f8f8;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
         
         body {
             margin: 0;
             padding: 0;
-            background-color: #1a1a2e;
-            color: #f8f8f8;
+            background-color: var(--dark);
+            color: var(--light);
             font-family: 'Indie Flower', cursive;
             overflow-x: hidden;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(150, 100, 255, 0.1) 0%, transparent 20%),
                 radial-gradient(circle at 90% 80%, rgba(255, 100, 150, 0.1) 0%, transparent 20%);
+            min-height: 100vh;
         }
         
         .container {
@@ -30,8 +42,8 @@
         
         h1 {
             font-family: 'Creepster', cursive;
-            color: #e94584;
-            font-size: 3rem;
+            color: var(--primary);
+            font-size: clamp(2rem, 5vw, 3rem);
             text-shadow: 3px 3px 0 #000;
             margin-bottom: 0;
             animation: pulse 2s infinite alternate;
@@ -39,34 +51,35 @@
         
         h2 {
             font-family: 'Gloria Hallelujah', cursive;
-            color: #b399d4;
+            color: var(--secondary);
             margin-top: 10px;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
         }
         
         .birthday-date {
-            font-size: 1.5rem;
-            color: #f8f8f8;
+            font-size: clamp(1.2rem, 3vw, 1.5rem);
+            color: var(--light);
             background: rgba(233, 69, 132, 0.3);
-            padding: 10px;
+            padding: 10px 20px;
             border-radius: 20px;
             display: inline-block;
             margin: 20px 0;
         }
         
         .message {
-            font-size: 1.3rem;
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
             line-height: 1.6;
             margin: 30px 0;
             text-align: left;
             background: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 15px;
-            border-left: 5px solid #e94584;
+            border-left: 5px solid var(--primary);
         }
         
         .lavender {
-            color: #b399d4;
-            font-size: 2rem;
+            color: var(--secondary);
+            font-size: clamp(1.5rem, 4vw, 2rem);
             margin: 10px;
             animation: float 3s ease-in-out infinite;
         }
@@ -75,20 +88,23 @@
             font-size: 1.5rem;
             animation: beat 1s infinite alternate;
             display: inline-block;
+            color: var(--primary);
         }
         
         .btn {
-            background: linear-gradient(45deg, #e94584, #b399d4);
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
             border: none;
             color: white;
-            padding: 15px 30px;
-            font-size: 1.2rem;
+            padding: 12px 25px;
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
             border-radius: 50px;
             cursor: pointer;
             font-family: 'Gloria Hallelujah', cursive;
-            margin: 20px 0;
+            margin: 15px 5px;
             transition: all 0.3s;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 250px;
         }
         
         .btn:hover {
@@ -100,15 +116,11 @@
             display: none;
         }
         
-        .surprise-container {
-            margin-top: 30px;
-        }
-        
         .photo-frame {
             width: 200px;
             height: 200px;
             margin: 0 auto;
-            border: 10px solid #b399d4;
+            border: 10px solid var(--secondary);
             border-radius: 50%;
             overflow: hidden;
             box-shadow: 0 0 20px rgba(179, 153, 212, 0.6);
@@ -122,13 +134,14 @@
         }
         
         .floating-hearts {
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
             z-index: 10;
+            overflow: hidden;
         }
         
         .heart-particle {
@@ -136,38 +149,145 @@
             font-size: 20px;
             opacity: 0;
             animation: float-up 4s linear forwards;
+            z-index: 10;
         }
         
-        .rick-morty {
+        .footer {
+            margin-top: 50px;
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        /* Efeitos de confete */
+        .confetti {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 100px;
-            opacity: 0.7;
-            transition: all 0.3s;
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary);
+            opacity: 0;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            animation: confetti-fall 5s linear forwards;
+        }
+        
+        /* Jogo da memória */
+        .memory-game {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 30px auto;
+            max-width: 500px;
+        }
+        
+        .memory-card {
+            aspect-ratio: 1;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+            position: relative;
         }
         
-        .rick-morty:hover {
-            opacity: 1;
-            transform: scale(1.1);
+        .memory-card.flipped {
+            transform: rotateY(180deg);
         }
         
-        .deadpool {
+        .memory-card .front-face,
+        .memory-card .back-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .memory-card .front-face {
+            background: var(--dark);
+            transform: rotateY(180deg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+        }
+        
+        .memory-card .back-face {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+        }
+        
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .game-title {
+            margin-bottom: 20px;
+        }
+        
+        /* Modal de vitória */
+        .win-modal {
             position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 100px;
-            opacity: 0.7;
-            transition: all 0.3s;
-            cursor: pointer;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s;
         }
         
-        .deadpool:hover {
+        .win-modal.active {
             opacity: 1;
-            transform: scale(1.1);
+            pointer-events: all;
         }
         
+        .win-content {
+            background: var(--dark);
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 500px;
+            max-height: 90%;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            border: 3px solid var(--primary);
+        }
+        
+        .win-content h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        
+        .win-content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .sexy-message {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            font-style: italic;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(233, 69, 132, 0.2);
+            border-radius: 10px;
+            border-left: 3px solid var(--primary);
+        }
+        
+        /* Animações */
         @keyframes pulse {
             0% { transform: scale(1); }
             100% { transform: scale(1.05); }
@@ -195,25 +315,6 @@
             }
         }
         
-        .footer {
-            margin-top: 50px;
-            font-size: 0.9rem;
-            color: #b399d4;
-        }
-        
-        /* Efeito de confete */
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #e94584;
-            opacity: 0;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-            animation: confetti-fall 5s linear forwards;
-        }
-        
         @keyframes confetti-fall {
             0% {
                 transform: translateY(-100px) rotate(0deg);
@@ -224,6 +325,26 @@
                 opacity: 0;
             }
         }
+        
+        @keyframes scaleIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .memory-game {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .btn {
+                padding: 10px 20px;
+            }
+            
+            .message {
+                padding: 15px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -231,70 +352,118 @@
         <div class="floating-hearts" id="hearts-container"></div>
         
         <div id="initial-content">
-            <h1>Feliz Aniversário, Letícia Beatriz!</h1>
-            <h2>14/07 - Um dia mais que especial</h2>
+            <h1>Feliz 17 Anos, Letícia Beatriz!</h1>
+            <h2>Um dia muito especial!</h2>
             
             <div class="birthday-date">
-                🎉 14 de Julho 🎂
+                🎉 14 de Julho de 2024 🎂
             </div>
             
-            <div class="lavender">🌸🌿💜</div>
+            <div class="lavender">🍇🍄🌺🤍</div>
             
             <div class="message">
                 <p>Letícia,</p>
                 <p>Hoje é o dia de celebrar você - essa pessoa incrível, única e maravilhosa que ilumina minha vida todos os dias.</p>
                 <p>Que este novo ano de vida traga ainda mais alegrias, conquistas e momentos especiais. Você merece tudo de melhor que a vida pode oferecer!</p>
                 <p>Obrigado por ser quem você é e por compartilhar sua vida comigo. Cada dia ao seu lado é um presente.</p>
-                <p>Com todo meu carinho, <span class="heart">♡</span></p>
+                <p>Com todo meu carinho e <span class="heart">♡</span></p>
             </div>
             
             <button class="btn" id="surprise-btn">Clique para uma surpresa!</button>
+            <button class="btn" id="game-btn">Jogar um jogo especial!</button>
             
             <div class="footer">
-                Feito com <span class="heart">♡</span> para Letícia Beatriz
+                Feito com <span class="heart">♡</span> especialmente para você
             </div>
         </div>
         
         <div id="surprise-content" class="hidden">
             <h1>Uau! Você encontrou a surpresa!</h1>
-            <h2>Para a pessoa mais incrível do universo</h2>
+            <h2>Para a garota mais incrível do universo</h2>
             
             <div class="photo-frame">
-                <!-- Espaço para uma foto - você pode adicionar uma imagem real aqui -->
-                <div style="width:100%; height:100%; background: linear-gradient(45deg, #b399d4, #e94584); display: flex; justify-content: center; align-items: center;">
+                <img src="llet.jpg" alt="">
+                <div style="width:100%; height:100%; background: linear-gradient(45deg, var(--secondary), var(--primary)); display: flex; justify-content: center; align-items: center;">
                     <span style="font-size: 3rem; color: white;">L&B <span class="heart">♡</span></span>
                 </div>
             </div>
             
             <div class="message">
-                <p>Letícia,</p>
-                <p>Você é como as flores de lavanda - bela, única e com um aroma que permanece em tudo que toca.</p>
-                <p>Neste dia especial, quero que saiba o quanto você é importante e amada. Que possamos comemorar muitos outros aniversários juntos!</p>
-                <p>Te amo mais que todas as estrelas do céu e todos os episódios de Rick e Morty combinados!</p>
+                <p>Querida Letícia,</p>
+                <p>Hoje é seu dia - 14 de Julho - e eu queria te surpreender com algo especial para celebrar seus 17 anos!</p>
+                <p>Você é incrível: inteligente, criativa, artística, engraçada e um amor de pessoa. Seus olhos e seu cabelo me deixam sem palavras todos os dias.</p>
+                <p>Obrigado por ser essa pessoa maravilhosa que ilumina minha vida. Que seu ano seja cheio de conquistas, alegrias e muitas aventuras!</p>
                 <p>Feliz aniversário, meu amor <span class="heart">♡</span></p>
             </div>
             
             <button class="btn" id="confetti-btn">Liberar confetes!</button>
             <button class="btn" id="back-btn">Voltar</button>
         </div>
+        
+        <div id="game-content" class="hidden">
+            <h1>Jogo da Memória</h1>
+            <h2>Encontre todos os pares para ganhar uma surpresa!</h2>
+            
+            <div class="game-container">
+                <div class="memory-game" id="memory-game"></div>
+            </div>
+            
+            <button class="btn" id="back-btn-2">Voltar</button>
+        </div>
     </div>
     
-    <img src="https://i.imgur.com/VZQDqj1.png" alt="Rick and Morty" class="rick-morty" title="Wubba lubba dub dub!">
-    <img src="https://i.imgur.com/XWg5DoX.png" alt="Deadpool" class="deadpool" title="Chimichangas!">
+    <!-- Modal de vitória -->
+    <div class="win-modal" id="win-modal">
+        <div class="win-content">
+            <h2>Parabéns, Letícia!</h2>
+            <p>Você completou o jogo e ganhou uma surpresa especial!</p>
+            
+            <div class="photo-frame" style="margin: 20px auto;">
+                <img src="llet.jpg" alt="">
+                <div style="width:100%; height:100%; background: linear-gradient(45deg, var(--primary), var(--secondary)); display: flex; justify-content: center; align-items: center;">
+                    <span style="font-size: 3rem; color: white;">17 <span class="heart">♡</span></span>
+                </div>
+            </div>
+            
+            <p>Você é a pessoa mais incrível que eu conheço e eu sou sortudo por ter você na minha vida!</p>
+            
+            <div class="sexy-message">
+                <p>E como recompensa... prepare-se para uma noite especial só nossa, com muitos beijos, carícias e momentos inesquecíveis. Eu te desejo de todas as formas possíveis...</p>
+            </div>
+            
+            <button class="btn" id="win-confetti-btn">Liberar confetes românticos!</button>
+            <button class="btn" id="close-modal-btn">Fechar</button>
+        </div>
+    </div>
     
     <script>
+        // Elementos do DOM
+        const initialContent = document.getElementById('initial-content');
+        const surpriseContent = document.getElementById('surprise-content');
+        const gameContent = document.getElementById('game-content');
+        const winModal = document.getElementById('win-modal');
+        
+        // Botões
+        const surpriseBtn = document.getElementById('surprise-btn');
+        const gameBtn = document.getElementById('game-btn');
+        const backBtn = document.getElementById('back-btn');
+        const backBtn2 = document.getElementById('back-btn-2');
+        const confettiBtn = document.getElementById('confetti-btn');
+        const winConfettiBtn = document.getElementById('win-confetti-btn');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        
         // Criar corações flutuantes
         function createHearts() {
             const container = document.getElementById('hearts-container');
             const heart = document.createElement('div');
-            heart.innerHTML = '♡';
+            heart.innerHTML = '💓';
             heart.classList.add('heart-particle');
             
             // Posição aleatória
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.animationDuration = 3 + Math.random() * 5 + 's';
             heart.style.fontSize = 10 + Math.random() * 20 + 'px';
-            heart.style.color = `hsl(${Math.random() * 60 + 270}, 100%, 70%)`;
+            heart.style.color = `hsl(${Math.random() * 60 + 320}, 100%, 70%)`;
             
             container.appendChild(heart);
             
@@ -306,7 +475,7 @@
         
         // Criar confetes
         function createConfetti() {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 150; i++) {
                 const confetti = document.createElement('div');
                 confetti.classList.add('confetti');
                 
@@ -314,11 +483,16 @@
                 confetti.style.left = Math.random() * 100 + 'vw';
                 
                 // Cor aleatória
-                const colors = ['#e94584', '#b399d4', '#ffcc00', '#00ccff', '#ff6666'];
+                const colors = ['#e94584', '#b399d4', '#ffcc00', '#00ccff', '#ff6666', '#ff99cc'];
                 confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
                 
+                // Forma aleatória
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                }
+                
                 // Tamanho aleatório
-                const size = Math.random() * 10 + 5;
+                const size = Math.random() * 15 + 5;
                 confetti.style.width = size + 'px';
                 confetti.style.height = size + 'px';
                 
@@ -335,34 +509,165 @@
             }
         }
         
-        // Botão de surpresa
-        document.getElementById('surprise-btn').addEventListener('click', function() {
-            document.getElementById('initial-content').classList.add('hidden');
-            document.getElementById('surprise-content').classList.remove('hidden');
+        // Criar confetes românticos (corações)
+        function createRomanticConfetti() {
+            for (let i = 0; i < 200; i++) {
+                const heart = document.createElement('div');
+                heart.innerHTML = '💓';
+                heart.classList.add('confetti');
+                heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+                heart.style.backgroundColor = 'transparent';
+                
+                // Posição aleatória
+                heart.style.left = Math.random() * 100 + 'vw';
+                
+                // Animação aleatória
+                heart.style.animationDuration = Math.random() * 4 + 3 + 's';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                
+                document.body.appendChild(heart);
+                
+                // Remover após a animação terminar
+                setTimeout(() => {
+                    heart.remove();
+                }, 7000);
+            }
+        }
+        
+        // Jogo da memória
+        function initMemoryGame() {
+            const memoryGame = document.getElementById('memory-game');
+            memoryGame.innerHTML = '';
+            
+            // Ícones temáticos de praia/mar
+            const icons = [
+                '🏖️', '🌊', '🐚', '🐠',
+                '🦀', '🏝️', '⛵', '🌴',
+                '🏖️', '🌊', '🐚', '🐠',
+                '🦀', '🏝️', '⛵', '🌴'
+            ];
+            
+            // Embaralhar os ícones
+            const shuffledIcons = icons.sort(() => Math.random() - 0.5);
+            
+            // Criar cartas
+            shuffledIcons.forEach((icon, index) => {
+                const card = document.createElement('div');
+                card.classList.add('memory-card');
+                card.dataset.index = index;
+                
+                card.innerHTML = `
+                    <div class="front-face">${icon}</div>
+                    <div class="back-face"></div>
+                `;
+                
+                card.addEventListener('click', flipCard);
+                memoryGame.appendChild(card);
+            });
+            
+            let hasFlippedCard = false;
+            let lockBoard = false;
+            let firstCard, secondCard;
+            let matchedPairs = 0;
+            
+            function flipCard() {
+                if (lockBoard) return;
+                if (this === firstCard) return;
+                
+                this.classList.add('flipped');
+                
+                if (!hasFlippedCard) {
+                    // Primeiro clique
+                    hasFlippedCard = true;
+                    firstCard = this;
+                    return;
+                }
+                
+                // Segundo clique
+                secondCard = this;
+                checkForMatch();
+            }
+            
+            function checkForMatch() {
+                const isMatch = firstCard.querySelector('.front-face').textContent === 
+                               secondCard.querySelector('.front-face').textContent;
+                
+                if (isMatch) {
+                    disableCards();
+                    matchedPairs++;
+                    
+                    // Verificar se o jogo acabou
+                    if (matchedPairs === icons.length / 2) {
+                        setTimeout(() => {
+                            winModal.classList.add('active');
+                            createRomanticConfetti();
+                        }, 1000);
+                    }
+                } else {
+                    unflipCards();
+                }
+            }
+            
+            function disableCards() {
+                firstCard.removeEventListener('click', flipCard);
+                secondCard.removeEventListener('click', flipCard);
+                
+                resetBoard();
+            }
+            
+            function unflipCards() {
+                lockBoard = true;
+                
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped');
+                    secondCard.classList.remove('flipped');
+                    
+                    resetBoard();
+                }, 1000);
+            }
+            
+            function resetBoard() {
+                [hasFlippedCard, lockBoard] = [false, false];
+                [firstCard, secondCard] = [null, null];
+            }
+        }
+        
+        // Event listeners
+        surpriseBtn.addEventListener('click', () => {
+            initialContent.classList.add('hidden');
+            surpriseContent.classList.remove('hidden');
             createConfetti();
         });
         
-        // Botão de voltar
-        document.getElementById('back-btn').addEventListener('click', function() {
-            document.getElementById('initial-content').classList.remove('hidden');
-            document.getElementById('surprise-content').classList.add('hidden');
+        gameBtn.addEventListener('click', () => {
+            initialContent.classList.add('hidden');
+            gameContent.classList.remove('hidden');
+            initMemoryGame();
         });
         
-        // Botão de confetes
-        document.getElementById('confetti-btn').addEventListener('click', function() {
-            createConfetti();
+        backBtn.addEventListener('click', () => {
+            surpriseContent.classList.add('hidden');
+            initialContent.classList.remove('hidden');
+        });
+        
+        backBtn2.addEventListener('click', () => {
+            gameContent.classList.add('hidden');
+            initialContent.classList.remove('hidden');
+        });
+        
+        confettiBtn.addEventListener('click', createConfetti);
+        winConfettiBtn.addEventListener('click', createRomanticConfetti);
+        
+        closeModalBtn.addEventListener('click', () => {
+            winModal.classList.remove('active');
         });
         
         // Criar corações continuamente
         setInterval(createHearts, 300);
         
-        // Efeito especial para os personagens
-        document.querySelector('.rick-morty').addEventListener('click', function() {
-            alert("Rick and Morty dizem: Feliz aniversário, Letícia! Wubba lubba dub dub!");
-        });
-        
-        document.querySelector('.deadpool').addEventListener('click', function() {
-            alert("Deadpool diz: Feliz aniversário, Letícia! Espero que seu dia seja tão incrível quanto meus chimichangas!");
+        // Iniciar com alguns confetes
+        window.addEventListener('load', () => {
+            setTimeout(createConfetti, 1000);
         });
     </script>
 </body>
